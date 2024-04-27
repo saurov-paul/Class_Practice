@@ -1,47 +1,77 @@
+#main_title {
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+}
 
-        .calculator {
-            background-color: #f5f5f5;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
+.calculator {
+  margin-top: 10rem;
+  background-color: #f5f5f5;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 18px;
-            border: none;
-            border-bottom: 2px solid #ccc;
-            outline: none;
-            margin-bottom: 10px;
-            text-align: center;
-            margin-left: -10px;
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: -10px;
+}
 
-        }
+input[type="submit"] {
+  padding: 15px;
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-items: center;
+  margin-right: 25px;
+  font-size: 2rem;
+}
 
-        input[type="submit"] {
-            padding: 15px;
-            background-color: tomato;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            align-items: center;
-            margin-right: 25px;
-            font-size: 2rem;
-        }
+input[type="submit"]:hover {
+  background-color: red;
+}
 
-        input[type="submit"]:hover {
-            background-color: red;
+h2{
+    border: 2px solid black;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 20px;
+    background: black;
+    color: white;
+}
 
-        }
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 100;
+}
+#footer p {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0.5rem;
+  font-family: "Roboto";
+}
