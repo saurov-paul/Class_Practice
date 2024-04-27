@@ -9,9 +9,12 @@
     <title>Simple Calculator</title>
 </head>
 
-
 <body>
-    <div class="calculator">
+
+<h1 id="main_title">Calculator</h1>
+
+
+<div class="calculator">
         <h1>Simple Calculator</h1>
         <form method="post">
             <input type="text" name="num1" placeholder="Enter number 1" required><br>
@@ -49,6 +52,11 @@
 
         ?>
     </div>
+
+
+<footer id="footer">
+    <p>&copy; 2024 Mr Paul. All Rights Reserved.</p>
+</footer>
 </body>
 
 </html>
