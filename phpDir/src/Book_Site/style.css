@@ -1,0 +1,41 @@
+#main_title {
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+#footer {
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 100;
+}
+#footer p {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0.5rem;
+  font-family: "Roboto";
+}
+
+.box1 h2 {
+  float: left;
+}
+.box1 button {
+  float: right;
+}
+.container {
+  margin-top: 5rem;
+}
+h6 {
+  text-align: center;
+  color: red;
+}
+h5 {
+  text-align: center;
+  color: green;
+}
