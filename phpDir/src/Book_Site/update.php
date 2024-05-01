@@ -1,45 +1,62 @@
-<?php include('dbcon.php'); ?>
-
 <?php
+include ('dbcon.php');
+
+if (!isset($_GET['id']) || !is_numeric($_GET['id']) || $_GET['id'] <= 0) {
+    die("Invalid book ID");
+}
+
 include('header.php');
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+$id = (int) $_GET['id'];
 
-    $stmt = $conn->prepare("SELECT * FROM `books` WHERE `id` = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$stmt = $conn->prepare("SELECT * FROM `books` WHERE `id` =?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-    } else {
-        die("query Failed 1: Invalid book ID");
-    }
-} 
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    die("query Failed 1: Invalid book ID");
+}
 
 if (isset($_POST['update_book'])) {
     if (isset($_GET['id_new'])) {
-        $idnew = $_GET['id_new'];
+        $idnew = (int) $_GET['id_new'];
+
+        if ($idnew <= 0) {
+            die("Invalid new book ID");
+        }
     } else {
         die("query Failed 2: Missing new book ID");
     }
 
-    $title = $_POST['title'];
-    $author = $_POST['author'];
-    $year = $_POST['year'];
-    $genre = $_POST['genre'];
-    $description = $_POST['description'];
+    $title = trim($_POST['title']);
+    $author = trim($_POST['author']);
+    $year = (int) $_POST['year'];
+    $genre = trim($_POST['genre']);
+    $description = trim($_POST['description']);
 
-    $stmt = $conn->prepare("UPDATE `books` SET `title` = ?, `author` = ?, `publishing_year` = ?, `genre` = ?, `description` = ? WHERE `id` = ?");
+    if (empty($title) || empty($author) || empty($genre) || empty($description)) {
+        die("Please fill in all fields");
+    }
+
+    if (!is_numeric($year) || $year < 1900 || $year > date('Y')) {
+        die("Invalid year");
+    }
+
+    $stmt = $conn->prepare("UPDATE `books` SET `title` =?, `author` =?, `publishing_year` =?, `genre` =?, `description` =? WHERE `id` =?");
     $stmt->bind_param("sssisi", $title, $author, $year, $genre, $description, $idnew);
 
-    if ($stmt->execute()) {
+    try {
+        $stmt->execute();
         header('location:index.php?update_msg= You have successfully updated the information');
-    } else {
-        die("query Failed 2: " . $conn->error);
+    } catch (Exception $e) {
+        error_log("Error updating book: " . $e->getMessage());
+        die("Error updating book: " . $e->getMessage());
     }
 }
+
 ?>
 
 <form action="update.php?id_new=<?php echo $id; ?>" method="post">
@@ -63,6 +80,7 @@ if (isset($_POST['update_book'])) {
         <label for="genre">Genre</label>
         <input type="text" name="genre" class="form-control" value="<?php echo htmlspecialchars($row['genre']) ?>">
     </div>
+
     <div class="form-group">
         <label for="description">Description</label>
         <input type="text" name="description" class="form-control" value="<?php echo htmlspecialchars($row['description']) ?>">
@@ -72,4 +90,5 @@ if (isset($_POST['update_book'])) {
 
 </form>
 
-<?php include('footer.php') ?>
+<?php include('footer.php');
+$conn->close(); ?>
